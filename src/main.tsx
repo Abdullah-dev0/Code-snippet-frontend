@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 	<QueryClientProvider client={queryClient}>
 		<ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
 			<App />
-			<Toaster richColors position="top-center" closeButton  duration={3000} />
 		</ThemeProvider>
+		<Toaster richColors position="top-center" closeButton duration={3000} />
 	</QueryClientProvider>,
 );
