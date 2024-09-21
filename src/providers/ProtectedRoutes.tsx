@@ -5,9 +5,9 @@ import { Navigate, Outlet } from "react-router-dom";
 const ProtectedRoutes = () => {
 	const { user, isLoading, isFetching } = useCurrentUser();
 
-	// Show loading state when fetching the user data
+	console.log("isLoading in Protected route", isLoading);
 
-	console.log("user in Protected route", user);
+	// Show loading state when fetching the user data
 	if (isLoading || isFetching) {
 		return (
 			<div className="text-center grid place-content-center h-screen">

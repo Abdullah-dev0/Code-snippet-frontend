@@ -13,7 +13,7 @@ export const useCurrentUser = () => {
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {
 					if (error.response?.status === 401) {
-						toast.error("Please login to continue.");
+						toast.error("You are not authorized to view this page. Please log in.");
 						throw new Error("Unauthorized");
 					} else {
 						toast.error("An unexpected error occurred. Please try again.");

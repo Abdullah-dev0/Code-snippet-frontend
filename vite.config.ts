@@ -7,12 +7,12 @@ export default defineConfig({
 	server: {
 		proxy: {
 			"/api": {
-				target: "http://localhost:3001",
+				target: "http://apicodenest.techonline.live",
 				changeOrigin: true,
 				secure: false,
 			},
 			"/login": {
-				target: "http://localhost:3001",
+				target: "http://apicodenest.techonline.live",
 				changeOrigin: true,
 				secure: false,
 			},
