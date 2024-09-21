@@ -8,6 +8,7 @@ import { InputOTPForm } from "@/pages/InputOTPForm";
 import AuthProvider from "@/providers/AuthProvider";
 import ProtectedRoutes from "@/providers/ProtectedRoutes";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
 
 export const App = () => {
 	return (
@@ -27,6 +28,7 @@ export const App = () => {
 				</Route>
 				<Route path="*" element={<div>404 - Not Found</div>} />
 			</Routes>
+			<Toaster richColors position="top-center" closeButton duration={3000} />
 		</Router>
 	);
 };
