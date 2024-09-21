@@ -13,7 +13,6 @@ import { Toaster } from "@/components/ui/sonner.tsx";
 export const App = () => {
 	return (
 		<Router>
-			<Toaster richColors position="top-center" closeButton duration={3000} />
 			<Routes>
 				<Route index element={<HomePage />} />
 				<Route element={<AuthProvider />}>
@@ -29,6 +28,7 @@ export const App = () => {
 				</Route>
 				<Route path="*" element={<div>404 - Not Found</div>} />
 			</Routes>
+			<Toaster richColors position="top-center" closeButton duration={3000} />
 		</Router>
 	);
 };
