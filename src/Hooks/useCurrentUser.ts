@@ -8,7 +8,8 @@ export const useCurrentUser = () => {
 		queryKey: ["currentUser"],
 		queryFn: async () => {
 			try {
-				const response = await axios.get("/api/getCurrentUser");
+				const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getCurrentUser`);
+				console.log(response);
 				return response.data;
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {

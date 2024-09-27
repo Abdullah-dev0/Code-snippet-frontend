@@ -6,8 +6,6 @@ import { Navigate, Outlet } from "react-router-dom";
 const AuthProvider = () => {
 	const { user, isLoading, isError, isFetching } = useCurrentUser();
 
-	console.log("isLoading in AuthProvider", isLoading);
-
 	if (isLoading || isFetching) {
 		return (
 			<div className="text-center grid place-content-center h-screen">
@@ -15,7 +13,6 @@ const AuthProvider = () => {
 			</div>
 		);
 	}
-	console.log(user);
 
 	if (isError || !user) {
 		return <Navigate to="/auth" replace />;

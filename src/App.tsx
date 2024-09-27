@@ -1,4 +1,5 @@
-import Layout from "@/layout.tsx";
+// router.ts
+import { Toaster } from "@/components/ui/sonner.tsx";
 import Auth from "@/pages/Auth";
 import { Bin } from "@/pages/Bin";
 import Dashboard from "@/pages/Dashboard.tsx";
@@ -6,29 +7,75 @@ import Favorites from "@/pages/Favorites";
 import HomePage from "@/pages/Home.tsx";
 import { InputOTPForm } from "@/pages/InputOTPForm";
 import AuthProvider from "@/providers/AuthProvider";
-import ProtectedRoutes from "@/providers/ProtectedRoutes";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Toaster } from "@/components/ui/sonner.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-export const App = () => {
-	return (
-		<Router>
-			<Routes>
-				<Route index element={<HomePage />} />
-				<Route element={<AuthProvider />}>
-					<Route element={<Layout />}>
-						<Route path="dashboard" element={<Dashboard />} />
-						<Route path="favorites" element={<Favorites />} />
-						<Route path="bin" element={<Bin />} />
-					</Route>
-				</Route>
-				<Route element={<ProtectedRoutes />}>
-					<Route path="auth" element={<Auth />} />
-					<Route path="Otp-verification" element={<InputOTPForm />} />
-				</Route>
-				<Route path="*" element={<div>404 - Not Found</div>} />
-			</Routes>
-			<Toaster richColors position="top-center" closeButton duration={3000} />
-		</Router>
-	);
-};
+// Public routes
+
+const notAuthRoutes = [
+	{
+		path: "auth",
+		element: <Auth />,
+	},
+	{
+		path: "otp-verification",
+		element: <InputOTPForm />,
+	},
+];
+
+const publicRoutes = [
+	{
+		path: "/",
+		element: <HomePage />,
+	},
+
+	{
+		children: notAuthRoutes,
+	},
+];
+
+// Auth routes (protected by AuthProvider)
+const authRoutes = [
+	{
+		path: "dashboard",
+		element: <Dashboard />,
+	},
+	{
+		path: "favorites",
+		element: <Favorites />,
+	},
+	{
+		path: "bin",
+		element: <Bin />,
+	},
+];
+
+const routes = [
+	{
+		path: "/",
+		children: [
+			{
+				children: publicRoutes,
+			},
+			{
+				element: <AuthProvider />,
+				children: authRoutes,
+			},
+		],
+	},
+
+	{
+		path: "*",
+		element: <div>404 - Not Found</div>,
+	},
+];
+
+const router = createBrowserRouter(routes);
+
+const App = () => (
+	<>
+		<RouterProvider router={router} />
+		<Toaster richColors position="top-center" closeButton duration={3000} />
+	</>
+);
+
+export default App;
