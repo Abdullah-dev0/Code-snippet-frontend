@@ -32,7 +32,7 @@ export function SignupForm() {
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (values: z.infer<typeof SignupSchema>) => {
-			const response = await axios.post("/api/auth/signup", values);
+			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, values);
 			return response.data;
 		},
 		onError: (error: any) => {

@@ -26,7 +26,7 @@ export function SigninForm() {
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (values: z.infer<typeof SigninSchema>) => {
-			const response = await axios.post("/api/auth/signin", values);
+			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, values);
 			return response.data;
 		},
 
