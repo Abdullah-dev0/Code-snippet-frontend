@@ -6,7 +6,9 @@ interface SocialLoginProps {
 }
 const SocialLogin = ({ disabled }: SocialLoginProps) => {
 	const onSubmit = (option: "Google" | "Github") => {
-		option === "Github" ? (window.location.href = "/login/github") : (window.location.href = "/api/login/google");
+		option === "Github"
+			? (window.location.href = `${import.meta.env.VITE_BACKEND_URL}/login/github`)
+			: (window.location.href = "/api/login/google");
 	};
 	return (
 		<div className="flex justify-between w-full max-sm:flex-col max-sm:gap-3">

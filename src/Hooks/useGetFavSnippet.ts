@@ -6,7 +6,9 @@ export const useGetFavSnippet = () => {
 		queryKey: ["getFavoritesSnippets"],
 		queryFn: async () => {
 			try {
-				const response = await axios.get("/api/getfavorites");
+				const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getfavorites`, {
+					withCredentials: true,
+				});
 
 				return response.data;
 			} catch (error) {

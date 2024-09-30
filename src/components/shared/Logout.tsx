@@ -14,7 +14,9 @@ const Logout = () => {
 	const handleLogout = async () => {
 		setLoading(true);
 		try {
-			const response = await axios.get("/api/auth/logout");
+			const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`, {
+				withCredentials: true,
+			});
 			if (response.status === 200) {
 				toast.success("Logged out successfully");
 				queryClient.removeQueries();

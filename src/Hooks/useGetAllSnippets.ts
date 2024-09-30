@@ -1,5 +1,5 @@
 import { Snippet } from "@/types";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 
@@ -7,10 +7,17 @@ export const useGetAllSnippets = (searchTerm: string) => {
 	console.log(searchTerm);
 	const { isLoading, data, isFetching } = useQuery<Snippet[]>({
 		queryKey: ["GetAllSnippets", searchTerm],
-		placeholderData: keepPreviousData,
 		queryFn: async () => {
 			try {
-				const response = await axios.get(`/api/getsnippets?deleted=${false}&search=${searchTerm}`);
+				const response = await axios.get(
+					`${import.meta.env.VITE_BACKEND_URL}/api/getsnippets?deleted=${false}&search=${searchTerm}`,
+
+					{
+						withCredentials: true,
+					},
+				);
+
+				console.log("response", response.data);
 				return response.data;
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {
@@ -43,7 +50,9 @@ export const useGetBinSnippets = () => {
 
 		queryFn: async () => {
 			try {
-				const response = await axios.get(`/api/getsnippets?deleted=${true}`);
+				const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/getsnippets?deleted=${true}`, {
+					withCredentials: true,
+				});
 				return response.data;
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {

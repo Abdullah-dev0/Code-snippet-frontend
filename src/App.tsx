@@ -8,6 +8,7 @@ import HomePage from "@/pages/Home.tsx";
 import { InputOTPForm } from "@/pages/InputOTPForm";
 import AuthProvider from "@/providers/AuthProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from "./layout";
 
 // Public routes
 
@@ -36,16 +37,21 @@ const publicRoutes = [
 // Auth routes (protected by AuthProvider)
 const authRoutes = [
 	{
-		path: "dashboard",
-		element: <Dashboard />,
-	},
-	{
-		path: "favorites",
-		element: <Favorites />,
-	},
-	{
-		path: "bin",
-		element: <Bin />,
+		element: <Layout />,
+		children: [
+			{
+				path: "dashboard",
+				element: <Dashboard />,
+			},
+			{
+				path: "favorites",
+				element: <Favorites />,
+			},
+			{
+				path: "bin",
+				element: <Bin />,
+			},
+		],
 	},
 ];
 

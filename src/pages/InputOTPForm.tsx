@@ -35,7 +35,9 @@ export function InputOTPForm() {
 
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (values: z.infer<typeof FormSchema>) => {
-			const response = await axios.post("/api/email-verification", values);
+			const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/email-verification`, values, {
+				withCredentials: true,
+			});
 			return response;
 		},
 		onError: (error: any) => {
@@ -62,7 +64,13 @@ export function InputOTPForm() {
 
 		try {
 			setLoading(true);
-			const response = await axios.post("/api/resent-verification");
+			const response = await axios.post(
+				`${import.meta.env.VITE_BACKEND_URL}/api/resent-verification`,
+				{},
+				{
+					withCredentials: true,
+				},
+			);
 			if (response.status === 201) {
 				toast.success("Code Sent Successfully");
 				restart(new Date(new Date().getTime() + 59 * 1000));
@@ -71,6 +79,7 @@ export function InputOTPForm() {
 			if (axios.isAxiosError(error)) {
 				if (error.response) {
 					toast.error(error.response.data.error);
+					return;
 				}
 			} else {
 				toast.error("An unexpected error occurred. Please try again.");
