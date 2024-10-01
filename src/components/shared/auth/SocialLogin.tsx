@@ -7,7 +7,7 @@ interface SocialLoginProps {
 const SocialLogin = ({ disabled }: SocialLoginProps) => {
 	const onSubmit = (option: "Google" | "Github") => {
 		option === "Github"
-			? (window.location.href = `/login/github`)
+			? (window.location.href = `${import.meta.env.VITE_BACKEND_URL}/login/github`)
 			: (window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/login/google`);
 	};
 	return (
