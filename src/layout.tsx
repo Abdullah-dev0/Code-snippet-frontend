@@ -1,7 +1,6 @@
+import Sidebar from "@/components/shared/Sidebar";
 import { Outlet } from "react-router-dom";
 import Navbar from "./components/shared/Navbar";
-import Sidebar from "@/components/shared/Sidebar";
-
 const Layout = () => {
 	return (
 		<>
