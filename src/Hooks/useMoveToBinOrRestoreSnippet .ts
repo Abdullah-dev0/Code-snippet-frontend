@@ -8,7 +8,13 @@ export const useMoveToBinOrRestoreSnippet = () => {
 
 	const mutation = useMutation({
 		mutationFn: async ({ snippetId, action }: { snippetId: string; action: "delete" | "restore" }) => {
-			const response = await axios.put("/api/snippet/action", { snippetId, action });
+			const response = await axios.put(
+				`${import.meta.env.VITE_BACKEND_URL}/api/snippet/action`,
+				{ snippetId, action },
+				{
+					withCredentials: true,
+				},
+			);
 			return { data: response.data, action };
 		},
 		onSuccess: ({ action }) => {
@@ -20,7 +26,6 @@ export const useMoveToBinOrRestoreSnippet = () => {
 			queryClient.refetchQueries({ queryKey: ["GetAllSnippets"] });
 
 			const favoriteSnippets = queryClient.getQueryData(["getFavoritesSnippets"]) as Snippet[];
-
 
 			if (favoriteSnippets.length !== 0) {
 				queryClient.refetchQueries({ queryKey: ["getFavoritesSnippets"] });

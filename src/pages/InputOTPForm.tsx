@@ -71,6 +71,7 @@ export function InputOTPForm() {
 					withCredentials: true,
 				},
 			);
+
 			if (response.status === 201) {
 				toast.success("Code Sent Successfully");
 				restart(new Date(new Date().getTime() + 59 * 1000));
@@ -123,7 +124,7 @@ export function InputOTPForm() {
 						/>
 						<p>
 							{isRunning ? (
-								`Code Expires in  ${seconds}s`
+								<p className="text-sm">Code Expires in {seconds}s</p>
 							) : (
 								<Button onClick={(e) => handleSubmit(e)} variant={"outline"} disabled={loading}>
 									{loading ? "Sending..." : "Resend Code"}

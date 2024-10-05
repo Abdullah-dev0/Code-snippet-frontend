@@ -9,6 +9,7 @@ import { InputOTPForm } from "@/pages/InputOTPForm";
 import AuthProvider from "@/providers/AuthProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layout";
+import NotFound from "./pages/NotFound";
 
 // Public routes
 
@@ -71,7 +72,7 @@ const routes = [
 
 	{
 		path: "*",
-		element: <div>404 - Not Found</div>,
+		element: <NotFound />,
 	},
 ];
 

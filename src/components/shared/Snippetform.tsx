@@ -37,13 +37,21 @@ const Snippetform = ({ snippet, type }: SnippetformProps) => {
 	const { mutate, isPending } = useMutation({
 		mutationFn: async (values: z.infer<typeof SnippetSchema>) => {
 			if (type === "update") {
-				const response = await axios.put("/api/update", {
-					...values,
-					id: snippet?.id,
-				});
+				const response = await axios.put(
+					`${import.meta.env.VITE_BACKEND_URL}/api/update`,
+					{
+						...values,
+						id: snippet?.id,
+					},
+					{
+						withCredentials: true,
+					},
+				);
 				return response.data;
 			} else {
-				const response = await axios.post("/api/create", values);
+				const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/create`, values, {
+					withCredentials: true,
+				});
 				return response.data;
 			}
 		},

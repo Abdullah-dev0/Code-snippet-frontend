@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "sonner";
 
 export const useCurrentUser = () => {
-	const { isLoading, isError, data, error, isFetching } = useQuery<User>({
+	const { isLoading, isError, data, isFetching } = useQuery<User>({
 		queryKey: ["currentUser"],
 		queryFn: async () => {
 			try {
@@ -15,8 +15,7 @@ export const useCurrentUser = () => {
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {
 					if (error.response?.status === 401) {
-						toast.error("      Please log in.");
-						throw new Error("Unauthorized");
+						toast.error("Please log in.");
 					} else {
 						toast.error("An unexpected error occurred. Please try again.");
 					}
@@ -30,5 +29,5 @@ export const useCurrentUser = () => {
 
 	const user = data?.user;
 
-	return { isLoading, isError, isFetching, user, error };
+	return { isLoading, isError, isFetching, user };
 };

@@ -49,7 +49,7 @@ export function SignupForm() {
 			toast.error("An unexpected error occurred. Please try again.");
 		},
 		onSuccess: () => {
-			toast.success("Sign up successfu please verify your email.");
+			toast.success("Sign up successfull please verify your email.");
 			navigate("/Otp-verification", { replace: true });
 		},
 	});
@@ -69,7 +69,7 @@ export function SignupForm() {
 							disabled={isPending}
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Email</FormLabel>
+									<FormLabel>username</FormLabel>
 									<FormControl>
 										<Input type="username" placeholder="username" {...field} />
 									</FormControl>
