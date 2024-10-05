@@ -2,10 +2,8 @@ import { useCurrentUser } from "@/Hooks/useCurrentUser";
 import { Loader2 } from "lucide-react";
 import { Navigate, Outlet } from "react-router-dom";
 
-const ProtectedRoutes = () => {
+const notAuthLayout = () => {
 	const { user, isLoading, isFetching } = useCurrentUser();
-
-	console.log("isLoading in Protected route", isLoading);
 
 	// Show loading state when fetching the user data
 	if (isLoading || isFetching) {
@@ -23,4 +21,4 @@ const ProtectedRoutes = () => {
 	return <Outlet />;
 };
 
-export default ProtectedRoutes;
+export default notAuthLayout;

@@ -10,6 +10,7 @@ import AuthProvider from "@/providers/AuthProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layout";
 import NotFound from "./pages/NotFound";
+import NotAuthLayout from "./providers/notAuthLayout";
 
 // Public routes
 
@@ -31,6 +32,7 @@ const publicRoutes = [
 	},
 
 	{
+		element: <NotAuthLayout />,
 		children: notAuthRoutes,
 	},
 ];
