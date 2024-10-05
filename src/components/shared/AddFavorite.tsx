@@ -17,7 +17,13 @@ const AddFavorite = ({ snippetId }: AddFavoriteProps) => {
 
 	const mutation = useMutation({
 		mutationFn: async ({ snippetId }: AddFavoriteProps) => {
-			const response = await axios.post("/api/addfavorite", { snippetId });
+			const response = await axios.post(
+				`${import.meta.env.VITE_BACKEND_URL}/api/addfavorite`,
+				{ snippetId },
+				{
+					withCredentials: true,
+				},
+			);
 			return { response };
 		},
 		onMutate: () => {

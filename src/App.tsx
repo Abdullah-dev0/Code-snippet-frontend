@@ -7,10 +7,10 @@ import Favorites from "@/pages/Favorites";
 import HomePage from "@/pages/Home.tsx";
 import { InputOTPForm } from "@/pages/InputOTPForm";
 import AuthProvider from "@/providers/AuthProvider";
+import NotAuthLayout from "@/providers/NotAuthLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./layout";
 import NotFound from "./pages/NotFound";
-import NotAuthLayout from "@/providers/NotAuthLayout";
 
 // Public routes
 

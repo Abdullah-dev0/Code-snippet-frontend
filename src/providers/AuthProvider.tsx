@@ -2,6 +2,7 @@
 import { useCurrentUser } from "@/Hooks/useCurrentUser";
 import { Loader2 } from "lucide-react";
 import { Navigate, Outlet } from "react-router-dom";
+import { toast } from "sonner";
 
 const AuthProvider = () => {
 	const { user, isLoading, isError, isFetching } = useCurrentUser();
@@ -15,11 +16,13 @@ const AuthProvider = () => {
 	}
 
 	if (isError || !user) {
+		toast.error("please login to continue");
 		return <Navigate to="/auth" replace />;
 	}
 
 	if (user && user.emailVerified !== true) {
-		return <Navigate to="/Otp-verification" replace />;
+		toast.error("please verify your email to continue");
+		return <Navigate to="/otp-verification" replace />;
 	}
 
 	return <Outlet />;

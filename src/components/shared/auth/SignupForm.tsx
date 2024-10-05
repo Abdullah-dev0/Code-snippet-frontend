@@ -50,7 +50,7 @@ export function SignupForm() {
 		},
 		onSuccess: () => {
 			toast.success("Sign up successfull please verify your email.");
-			navigate("/Otp-verification", { replace: true });
+			navigate("/otp-verification", { replace: true });
 		},
 	});
 

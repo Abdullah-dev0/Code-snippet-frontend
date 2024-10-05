@@ -15,7 +15,7 @@ export const useCurrentUser = () => {
 			} catch (error: any) {
 				if (axios.isAxiosError(error)) {
 					if (error.response?.status === 401) {
-						toast.error("Please log in.");
+						return null;
 					} else {
 						toast.error("An unexpected error occurred. Please try again.");
 					}
