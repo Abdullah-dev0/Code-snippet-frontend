@@ -4,6 +4,7 @@ import { useGetBinSnippets } from "@/Hooks/useGetAllSnippets";
 import { Snippet } from "@/types";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 export const Bin = () => {
@@ -13,7 +14,9 @@ export const Bin = () => {
 	// Make sure this hook is declared before any returns
 	const mutation = useMutation({
 		mutationFn: async () => {
-			const response = await axios.delete("/api/emptybin");
+			const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/emptybin`, {
+				withCredentials: true,
+			});
 			return response.data;
 		},
 		onSuccess: () => {
@@ -26,10 +29,12 @@ export const Bin = () => {
 			if (axios.isAxiosError(error)) {
 				if (error.response) {
 					toast.error(error.response.data.error);
+					return;
 				}
 			} else {
 				toast.error("An unexpected error occurred. Please try again.");
 			}
+			toast.error("Failed to empty bin. Please try again.");
 		},
 	});
 
@@ -39,7 +44,7 @@ export const Bin = () => {
 
 	if (mutation.isPending) {
 		return (
-			<div className="text-red text-4xl h-screen w-full bg-slate-600 z-50 grid place-content-center">Emptying...</div>
+			<Loader2 className="animate-spin w-10 h-10 text-blue-500" />
 		);
 	}
 
